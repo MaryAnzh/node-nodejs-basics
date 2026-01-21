@@ -1,3 +1,7 @@
 # Node.js basics
 
-## !!! Please don't submit Pull Requests to this repository !!!
+21/01/2026
+## Fork and Use for self-study of node and jest tests
+
+1. src/fs
+- create.js + create.test.js

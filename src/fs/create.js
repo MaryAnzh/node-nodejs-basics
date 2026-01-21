@@ -1,14 +1,15 @@
 import { promises as fs } from 'fs';
+import * as C from '../constants';
 
 export const create = async () => {
     try {
-        await fs.writeFile('fresh.txt', 'I am fresh and young', { flag: 'wx' });
-        console.log('Файл успешно создан!');
+        await fs.writeFile(C.FRESH_TXT, C.CREATE_TEXT, { flag: 'wx' });
+        console.log(C.SUCCESS);
     } catch (err) {
         if (err.code === 'EEXIST') {
-            throw new Error('FS operation failed'); // файл уже существует
+            throw new Error(C.ERROR_MESSAGE_FS);
         } else {
-            console.error('Ошибка при создании файла:', err);
+            console.error(err);
             throw err;
         }
     }

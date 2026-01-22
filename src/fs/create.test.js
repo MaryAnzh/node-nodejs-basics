@@ -11,14 +11,14 @@ describe('create file', () => {
         } catch { console.error(C.TEST_FOULED) }
     });
 
-    test('создаёт новый файл', async () => {
+    test('Create new file', async () => {
         await create();
         const content = await fs.readFile(fileName, 'utf-8');
         expect(content).toBe(C.CREATE_TEXT);
     });
 
-    test('выбрасывает ошибку, если файл уже существует', async () => {
-        await fs.writeFile(fileName, 'test');
+    test('If file exist Throw error', async () => {
+        await fs.writeFile(fileName, C.TEST);
         await expect(create()).rejects.toThrow(C.ERROR_MESSAGE_FS);
     });
 });

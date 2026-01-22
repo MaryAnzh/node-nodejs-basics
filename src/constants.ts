@@ -14,4 +14,4 @@ export const {
     ERROR_MESSAGE: 'Ops.. error',
     TEST_FOULED: 'test fouled',
     TEST: 'test'
-};
+} as const;

@@ -1,6 +1,6 @@
 import { promises as fs } from 'fs';
-import { create } from './create.js';
-import * as C from '../constants.js';
+import { create } from './create';
+import * as C from '../constants';
 
 describe('create file', () => {
     const fileName = C.FRESH_TXT;

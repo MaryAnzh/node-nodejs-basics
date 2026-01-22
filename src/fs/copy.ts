@@ -1,9 +1,9 @@
 import { promises as fs } from 'fs';
 import path from 'path';
 
-import { ERROR_MESSAGE_FS, SUCCESS } from '../constants.js';
+import { ERROR_MESSAGE_FS } from '../constants';
 
-export const copy = async (srcPath, destPath) => {
+export const copy = async (srcPath: string, destPath: string) => {
     try {
         // check is src folder exist
         await fs.access(srcPath);
@@ -11,7 +11,8 @@ export const copy = async (srcPath, destPath) => {
         try {
             await fs.access(destPath);
             throw new Error(ERROR_MESSAGE_FS);
-        } catch ({ code }) {
+        } catch (err: unknown) {
+            const { code } = err as NodeJS.ErrnoException;
             if (code === 'ENOENT') {
                 await fs.mkdir(destPath);
             } else {
@@ -20,7 +21,7 @@ export const copy = async (srcPath, destPath) => {
         }
 
 
-        const copyRecursive = async (src, dest) => {
+        const copyRecursive = async (src: string, dest: string) => {
             const entries = await fs.readdir(src, { withFileTypes: true });
 
             for (const entry of entries) {

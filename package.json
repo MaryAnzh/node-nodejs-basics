@@ -4,6 +4,8 @@
   "description": "This repository is the part of nodejs-assignments https://github.com/AlreadyBored/nodejs-assignments",
   "type": "module",
   "scripts": {
+    "build": "tsc",
+    "compile": "npx tsc -v && npx tsc -b",
     "test": "jest"
   },
   "repository": {
@@ -23,6 +25,9 @@
   },
   "homepage": "https://github.com/AlreadyBored/node-nodejs-basics#readme",
   "devDependencies": {
-    "jest": "^30.2.0"
+    "@types/jest": "^30.0.0",
+    "jest": "^30.2.0",
+    "ts-jest": "^29.4.6",
+    "typescript": "^5.9.3"
   }
 }

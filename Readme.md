@@ -5,3 +5,4 @@
 
 1. src/fs
 - create.js + create.test.js
+- copy.js + copy.test.js

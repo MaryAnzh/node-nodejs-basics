@@ -1,7 +1,7 @@
 import { promises as fs } from 'fs';
 import path from 'path';
-import { copy } from './copy.js';
-import * as C from '../constants.js';
+import { copy } from './copy';
+import * as C from '../constants';
 
 describe('Copy file', () => {
     const folderName = C.TEST;

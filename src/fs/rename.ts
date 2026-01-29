@@ -1,5 +1,6 @@
 import { promises as fs } from 'fs';
 import path from 'path';
+import * as C from '../constants.ts';
 
 export const rename = async (oldName: string, newName: string, folder: string) => {
     const oldPath = path.resolve(`${folder}/${oldName}`);
@@ -7,26 +8,21 @@ export const rename = async (oldName: string, newName: string, folder: string) =
 
     try {
         await fs.access(oldPath);
-        try {
-            await fs.access(newPath);
-            throw new Error(`exist`);
-        } catch (err) {
-            const { message } = err as NodeJS.ErrnoException;
-            if (message === `exist`) {
-                throw new Error(`exist`);
-            } else {
-                await fs.rename(oldPath, newPath);
-            }
-        }
+    }
+    catch {
+        throw new Error(`Couldn't find file: ${oldName}`);
+    }
+
+    try {
+        await fs.access(newPath);
+        throw new Error();
     } catch (err) {
-        const { code, message } = err as NodeJS.ErrnoException;
-        if (code === 'ENOENT') {
-            throw new Error(`Couldn't find file: ${oldName}`);
-        }
-        if (message === 'exist') {
+        const { code } = err as NodeJS.ErrnoException;
+        if (code !== C.ENOENT) {
             throw new Error(`The file with new name: ${newName} -- exist`);
         }
     }
+    await fs.rename(oldPath, newPath);
 }
 
 // rename('wrongFilename.txt', 'fileNewName.txt');

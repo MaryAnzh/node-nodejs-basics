@@ -8,6 +8,7 @@ export const {
     TEST,
     TEST_CONTENT,
     FOLDER_NAME,
+    ENOENT,
 } = {
     FRESH_TXT: 'fresh.txt',
     CREATE_TEXT: 'I am fresh and young',
@@ -18,4 +19,5 @@ export const {
     TEST: 'test',
     TEST_CONTENT: 'test content',
     FOLDER_NAME: 'test_folder',
+    ENOENT: 'ENOENT',
 } as const;

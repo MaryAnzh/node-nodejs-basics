@@ -4,5 +4,7 @@
 ## Fork and Use for self-study of node and jest tests
 
 1. src/fs
-- create.js + create.test.js
-- copy.js + copy.test.js
+- create.ts + create.test.ts
+- copy.ts + copy.test.ts
+- rename.ts + rename.test.ts
+- delete.ts + detete.test.ts

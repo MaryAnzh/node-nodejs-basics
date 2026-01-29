@@ -4,7 +4,7 @@ import { rename } from './rename';
 import * as C from '../constants';
 
 describe('rename file', () => {
-    const folder = path.resolve(C.FOLDER_NAME);
+    const folder = path.resolve(C.TEST_FOLDER_NAME);
     const oldName = 'wrongFilename.txt';
     const newName = 'properFilename.md';
     const oldPath = path.join(folder, oldName);
@@ -26,18 +26,18 @@ describe('rename file', () => {
     });
 
     test('rename file', async () => {
-        await rename(oldName, newName, C.FOLDER_NAME);
+        await rename(oldName, newName, C.TEST_FOLDER_NAME);
         const content = await fs.readFile(newPath, 'utf-8');
         expect(content).toBe(C.TEST_CONTENT);
     });
 
     test('throw an error if the file is missing', async () => {
         await fs.rm(oldPath, { force: true });
-        await expect(rename(oldName, newName, C.FOLDER_NAME)).rejects.toThrow(`Couldn't find file: ${oldName}`);
+        await expect(rename(oldName, newName, C.TEST_FOLDER_NAME)).rejects.toThrow(`Couldn't find file: ${oldName}`);
     });
 
     test('throw an error if file with newName exist', async () => {
         await fs.writeFile(newPath, 'already exists');
-        await expect(rename(oldName, newName, C.FOLDER_NAME)).rejects.toThrow(`The file with new name: ${newName} -- exist`);
+        await expect(rename(oldName, newName, C.TEST_FOLDER_NAME)).rejects.toThrow(`The file with new name: ${newName} -- exist`);
     });
 });

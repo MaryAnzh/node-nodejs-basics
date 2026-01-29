@@ -7,7 +7,8 @@ export const {
     TEST_FOULED,
     TEST,
     TEST_CONTENT,
-    FOLDER_NAME,
+    TEST_FOLDER_NAME,
+    FILES,
     ENOENT,
 } = {
     FRESH_TXT: 'fresh.txt',
@@ -18,6 +19,7 @@ export const {
     TEST_FOULED: 'test fouled',
     TEST: 'test',
     TEST_CONTENT: 'test content',
-    FOLDER_NAME: 'test_folder',
+    TEST_FOLDER_NAME: 'test_folder',
+    FILES: 'files',
     ENOENT: 'ENOENT',
 } as const;

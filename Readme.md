@@ -9,3 +9,4 @@
 - rename.ts + rename.test.ts
 - delete.ts + detete.test.ts
 - list.ts + list.test.ts
+- read.ts + read.test.ts

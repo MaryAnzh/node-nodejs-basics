@@ -10,6 +10,9 @@ export const {
     TEST_FOLDER_NAME,
     FILES,
     ENOENT,
+    CONVERT_ERROR,
+    NOT_FOUND,
+    FOLDER_EXIST,
 } = {
     FRESH_TXT: 'fresh.txt',
     CREATE_TEXT: 'I am fresh and young',
@@ -22,4 +25,7 @@ export const {
     TEST_FOLDER_NAME: 'test_folder',
     FILES: 'files',
     ENOENT: 'ENOENT',
+    CONVERT_ERROR: 'Conversation fold',
+    NOT_FOUND: 'not found',
+    FOLDER_EXIST: 'folder exist',
 } as const;

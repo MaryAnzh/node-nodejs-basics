@@ -1,7 +1,16 @@
 export default {
-    preset: 'ts-jest',
+    preset: 'ts-jest/presets/default-esm',
     testEnvironment: 'node',
-    transform: {},
     extensionsToTreatAsEsm: ['.ts'],
+    transform: {
+        '^.+\\.ts$': [
+            'ts-jest',
+            {
+                useESM: true,
+                diagnostics: {
+                    ignoreCodes: [151002],
+                },
+            },
+        ],
+    },
 };
-

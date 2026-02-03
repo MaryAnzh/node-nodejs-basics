@@ -2,7 +2,6 @@ import { promises as fs } from 'fs';
 import sharp from 'sharp';
 import path from 'path';
 import * as C from '../constants.ts';
-import { fileURLToPath } from 'url';
 
 const formats = [
     'jpg', 'jpeg', 'png', 'tif', 'tiff', 'avif', 'svg', 'raw'
@@ -16,9 +15,6 @@ const filterFormats = (fileNames: string[]) =>
                 : formats.includes(format);
         });
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
 const checkOutputPath = (outputFolderPath: string, arr: string[], inputFileName: string, index = 0): string => {
     const baseName = path.basename(inputFileName, path.extname(inputFileName));
     const fileName = index === 0 ? `${baseName}.webp` : `${baseName}_${index}.webp`;
@@ -30,10 +26,11 @@ const checkOutputPath = (outputFolderPath: string, arr: string[], inputFileName:
     return p;
 };
 
-export const convertImgToWebp = async (inputFolder: string, outputFolder: string) => {
+export const convertImgToWebp = async (inputFolder: string, outputFolder: string, dirPath: string) => {
     //read files from input dir
-    const makePath = (dir: string) => `../access/${dir}`;
-    const inputFolderPath = path.resolve(__dirname, makePath(inputFolder));
+    const makePath = (folderName: string) => `${dirPath}/${folderName}`;
+    const inputFolderPath = path.resolve(process.cwd(), makePath(inputFolder));
+    const outputFolderPath = path.resolve(process.cwd(), makePath(outputFolder));
     let filesSet: string[] = [];
 
     try {
@@ -49,8 +46,6 @@ export const convertImgToWebp = async (inputFolder: string, outputFolder: string
         console.log(`The ${inputFolder} folder hasn't file for convert`);
         return filesSet;
     }
-
-    const outputFolderPath = path.resolve(__dirname, makePath(outputFolder));
 
     try {
         await fs.access(outputFolderPath);
@@ -83,4 +78,7 @@ export const convertImgToWebp = async (inputFolder: string, outputFolder: string
     return results;
 };
 
-console.log(await convertImgToWebp('img', 'webP'));
+// (async () => {
+//     const data = await convertImgToWebp('img', 'webP', 'src/access');
+//     console.log(data);
+// })();

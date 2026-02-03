@@ -8,7 +8,6 @@ additional (don't in task):
   1) convert all img files to new folder in webP format;
   2) replaces duplicate file names ((img.svg, img.png) ==> (img.webP img_1.webP));
   3) ignore wrong formats files;
-  test in progress...
 
 1. src/fs:
 - create.ts + create.test.ts;

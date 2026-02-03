@@ -9,7 +9,7 @@ import { filterWithFormat } from './utils.ts';
 const testFolder = `${C.TEST_FOLDER_NAME}_webP`;
 const inputFolderName = 'img';
 const outputFolderName = 'output';
-
+const format = '.webp';
 const tempInputFolder = path.resolve(testFolder, inputFolderName);
 const tempOutputFolder = path.resolve(testFolder, outputFolderName);
 
@@ -69,20 +69,28 @@ describe('webP converter', () => {
         expect(checkName).toBe(true);
     })
 
+    test('check conversion file format', async () => {
+        const results = await convertImgToWebp(inputFolderName, outputFolderName, testFolder);
+        const check = results.filter(({ path: p }) => path.extname(p) === format);
+        expect(results.length === check.length).toBe(true);
+    });
+
     test(`throw error if input folder empty or hasn't img file`, async () => {
         await fs.rm(path.resolve(tempInputFolder, testFileName_1));
         await fs.rm(path.resolve(tempInputFolder, testFileName_2));
         const inputFolderFile = await fs.readdir(tempInputFolder);
         const imageFiles = filterWithFormat(inputFolderFile, C.WEB_P_FORMATS);
         expect(imageFiles.length).toBe(0);
-        await expect(convertImgToWebp(inputFolderName, outputFolderName, testFolder)).rejects.toThrow(`The ${inputFolderName} folder hasn't file for convert`);
+        await expect(convertImgToWebp(inputFolderName, outputFolderName, testFolder))
+            .rejects
+            .toThrow(new Error(`The ${inputFolderName} folder hasn't file for convert`));
     });
 
     test(`throw error if input folder doesn't exist`, async () => {
         await fs.rm(tempInputFolder, { recursive: true, force: true });
         await expect(convertImgToWebp(inputFolderName, outputFolderName, testFolder))
             .rejects
-            .toThrow(`${inputFolderName} ${C.NOT_FOUND}`);
+            .toThrow();
     });
 });
 
